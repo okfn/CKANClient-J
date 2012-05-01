@@ -38,4 +38,19 @@
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
   </target>
+
+<javadoc packagenames="org.ckan.*"
+           sourcepath="src"
+           defaultexcludes="yes"
+           destdir="docs/"
+           author="true"
+           version="true"
+           use="true"
+           windowtitle="JCKAN Client">
+    <doctitle><![CDATA[<h1>Java CKAN Client</h1>]]></doctitle>
+    <bottom><![CDATA[<i>Copyright &#169; 2012 OKFN. All Rights Reserved.</i>]]></bottom>
+    <tag name="todo" scope="all" description="To do:"/>
+    <link offline="true" href="http://download.oracle.com/javase/6/docs/api/" packagelistLoc="C:\tmp"/>
+    <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
+  </javadoc>
 </project>
