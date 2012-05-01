@@ -1,7 +1,7 @@
 package org.ckan;
 
 
-final class Client {
+public final class Client {
 
 
 }
