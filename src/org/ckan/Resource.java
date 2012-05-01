@@ -1,7 +1,7 @@
 package org.ckan;
 
 
-final class Group {
+public final class Resource {
 
 
 }

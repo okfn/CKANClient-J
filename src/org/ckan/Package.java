@@ -1,7 +1,7 @@
 package org.ckan;
 
 
-final class Package {
+public final class Package {
 
 
 }
