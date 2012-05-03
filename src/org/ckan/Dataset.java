@@ -36,10 +36,13 @@ public final class Dataset extends CKANObject {
     * @param value Normally either a list or a dict of some form
     */
     public void PickField( String key, Object value ) {
-
+        System.out.println("Picking " + key );
     }
 
 
+    public String toString() {
+        return "<Dataset:" + this.type + ", " + this.title + "," + this.author + ">";
+    }
 }
 
 
