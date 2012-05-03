@@ -5,7 +5,7 @@ package org.ckan;
  * Connection holds the connection details for this session
  *
  * @author      Ross Jones <ross.jones@okfn.org>
- * @version     1.0
+ * @version     1.7
  * @since       2012-05-01
  */
 public final class Connection {
@@ -24,6 +24,10 @@ public final class Connection {
     public Connection( String host, int port ) {
         this.m_host = host;
         this.m_port = port;
+    }
+
+    protected String Post(String data) {
+        return null;
     }
 
 }

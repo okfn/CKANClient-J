@@ -1,27 +1,21 @@
 package org.ckan;
 
-import java.net.URI;
 import java.util.Date;
 import java.util.Map;
 
 /**
- * Represents a CKAN group
+ * Base class for objects originating from CKAN servers, generally
+ * populated from the retrieved JSON
  *
  * @author      Ross Jones <ross.jones@okfn.org>
  * @version     1.7
- * @since       2012-05-01
+ * @since       2012-05-03
  */
-public final class Group extends CKANObject {
+public abstract class CKANObject {
 
-    public String id;
-    public String name;
-    public String title;
-    public String type;
-    public String description;
-    public URI    image_url;
-    public Date   created;
-    public String approval_status;
-    public Map<String,String> extras;
+    public void Load( Map<String, Object> obj ) {
+
+    }
 
     /**
     * Once the obvious string fields have been processed, the lists and dicts
@@ -31,9 +25,7 @@ public final class Group extends CKANObject {
     * @param key The key from the original JSON
     * @param value Normally either a list or a dict of some form
     */
-    public void PickField( String key, Object value ) {
-
-    }
+    public abstract void PickField( String key, Object value );
 
 }
 

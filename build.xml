@@ -43,7 +43,7 @@
   <target name="dist" depends="compile"
         description="generate the distribution" >
     <mkdir dir="${dist}/lib"/>
-    <jar jarfile="${dist}/lib/JCKANClient-${DSTAMP}.jar" basedir="${build}"/>
+    <jar jarfile="${dist}/lib/JCKANClient-1.7.jar" basedir="${build}"/>
   </target>
 
   <target name="clean"
