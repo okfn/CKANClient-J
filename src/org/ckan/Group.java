@@ -10,7 +10,15 @@ package org.ckan;
  */
 public final class Group {
 
-
+    public String Id;
+    public String Name;
+    public String Title;
+    public String Type;
+    public String Description;
+    public String Image_Url;
+    public String Created;
+    public String Approval_Status;
+    public Object Extras;
 }
 
 
