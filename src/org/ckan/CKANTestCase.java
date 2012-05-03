@@ -15,6 +15,7 @@ public class CKANTestCase {
         map.put("title", "The title goes here");
         map.put("type", "Dataset");
         map.put("author", "Ross Jones");
+        map.put("url", "http://somewhere.com");
 
         Dataset d = new Dataset();
         d.Load( map );

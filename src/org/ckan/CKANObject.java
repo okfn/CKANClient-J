@@ -15,18 +15,24 @@ import java.lang.reflect.*;
  */
 public abstract class CKANObject {
 
+    /**
+    * Load the provided map into the fields of this class, asking the class
+    * what it wants to do with non-string fields.
+    *
+    * @param obj The key-value map which contains the data from a JSON
+    *            file
+    */
     public void Load( Map<String, Object> obj ) {
         Class clazz = this.getClass();
         for (Map.Entry<String,Object> entry : obj.entrySet() ) {
-            System.out.println("Checking " + entry.getKey());
-
             try {
                 Field f = clazz.getDeclaredField( entry.getKey() );
                 Class cls = f.getType();
+
                 if ( cls == "".getClass() ) {
                     f.set( this, entry.getValue() );
                 } else {
-                    this.PickField( entry.getKey(), entry.getValue() );
+                    this.HandleField( entry.getKey(), entry.getValue() );
                 }
 
             } catch ( NoSuchFieldException nsfe ) {
@@ -38,14 +44,14 @@ public abstract class CKANObject {
     }
 
     /**
-    * Once the obvious string fields have been processed, the lists and dicts
-    * need to be parsed, but these are specific to the object processing them
-    * and so it is given a chance to grab those extra fields
+    * Called when Load() fails to find a String field to map a given key
+    * to, instead the key and value are passed to the concrete instance
+    * so that it can decide what to do with the data.
     *
     * @param key The key from the original JSON
     * @param value Normally either a list or a dict of some form
     */
-    public abstract void PickField( String key, Object value );
+    public abstract void HandleField( String key, Object value );
 
 }
 

@@ -31,6 +31,7 @@
                author="true"
                version="true"
                use="true"
+               classpath="${lib}/junit-4.10.jar"
                windowtitle="JCKAN Client">
         <doctitle><![CDATA[<h1>Java CKAN Client</h1>]]></doctitle>
         <bottom><![CDATA[<i>Copyright &#169; 2012 OKFN. All Rights Reserved.</i>]]></bottom>

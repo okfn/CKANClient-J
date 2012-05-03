@@ -26,14 +26,14 @@ public final class Related extends CKANObject {
     public URI     url;
 
     /**
-    * Once the obvious string fields have been processed, the lists and dicts
-    * need to be parsed, but these are specific to the object processing them
-    * and so it is given a chance to grab those extra fields
+    * Called when Load() fails to find a String field to map a given key
+    * to, instead the key and value are passed to the concrete instance
+    * so that it can decide what to do with the data.
     *
     * @param key The key from the original JSON
     * @param value Normally either a list or a dict of some form
     */
-    public void PickField( String key, Object value ) {
+    public void HandleField( String key, Object value ) {
 
     }
 
