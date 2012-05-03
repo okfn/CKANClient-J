@@ -5,17 +5,25 @@
   <property name="src" location="src"/>
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
+  <property name="lib"  location="lib"/>
+  <property name="test_results"  location="test_results"/>
 
   <target name="init">
     <!-- Create the time stamp -->
     <tstamp/>
     <!-- Create the build directory structure used by compile -->
     <mkdir dir="${build}"/>
+    <mkdir dir="${test_results}"/>
   </target>
 
   <target name="compile" depends="init"
-        description="compile the source " >
-    <javac srcdir="${src}" destdir="${build}"/>
+        description="compile the source ">
+    <javac srcdir="${src}" destdir="${build}"
+        classpath="${lib}/junit-4.10.jar"/>
+  </target>
+
+  <target name="docs" depends="compile"
+        description="compile the docs ">
     <javadoc packagenames="org.ckan.*"
                sourcepath="src"
                defaultexcludes="yes"
@@ -32,11 +40,22 @@
       </javadoc>
   </target>
 
+
   <target name="test" depends="compile"
-        description="compile the source and the tests " >
-<!-- Need to add junit to this version of the code -->
-    <javac srcdir="${src}" destdir="${build}"/>
-<!-- Run the tests -->
+        description="run the tests " >
+    <junit printsummary="yes" haltonfailure="yes" showoutput="yes" >
+      <classpath>
+        <pathelement path="${build}"/>
+        <pathelement path="${lib}/junit-4.10.jar"/>
+      </classpath>
+
+      <batchtest fork="yes" todir="test_results/">
+        <formatter type="xml"/>
+        <fileset dir="${src}">
+          <include name="**/*TestCase.java"/>
+        </fileset>
+      </batchtest>
+    </junit>
   </target>
 
 

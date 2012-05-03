@@ -1,14 +1,16 @@
 package org.ckan;
 
+import org.junit.* ;
+import static org.junit.Assert.* ;
+
 import java.util.Map;
 import java.util.HashMap;
 
-public class CTest {
 
+public class CKANTestCase {
 
-    public static void main(String[] args ){
-        System.out.println("Hello World");
-
+    @Test
+    public void test_BasicDataset_Local() {
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("title", "The title goes here");
         map.put("type", "Dataset");
@@ -17,6 +19,12 @@ public class CTest {
         Dataset d = new Dataset();
         d.Load( map );
 
-        System.out.println( d.toString() );
+        assertTrue(d.title.equals("The title goes here"));
+        assertTrue(d.type.equals("Dataset"));
+        assertTrue(d.author.equals("Ross Jones"));
     }
+
+
 }
+
+
