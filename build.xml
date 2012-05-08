@@ -19,7 +19,7 @@
   <target name="compile" depends="init"
         description="compile the source ">
     <javac srcdir="${src}" destdir="${build}"
-        classpath="${lib}/junit-4.10.jar"/>
+        classpath="${lib}/junit-4.10.jar:${lib}/gson-2.2.jar"/>
   </target>
 
   <target name="docs" depends="compile"
@@ -48,6 +48,7 @@
       <classpath>
         <pathelement path="${build}"/>
         <pathelement path="${lib}/junit-4.10.jar"/>
+        <pathelement path="${lib}/gson-2.2.jar"/>
       </classpath>
 
       <batchtest fork="yes" todir="test_results/">

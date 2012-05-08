@@ -9,25 +9,63 @@ import java.util.Date;
  * @version     1.7
  * @since       2012-05-01
  */
-public final class User extends CKANObject {
+public class User {
 
-    public String id;
-    public String name;
-    public String fullname;
-    public String email;
-    public Date   created;
-    public String about;
+    private String id;
+    private String name;
+    private String fullname;
+    private String email;
+    private String created;
+    private String about;
+    
+    public User() {}
+    
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    /**
-    * Called when Load() fails to find a String field to map a given key
-    * to, instead the key and value are passed to the concrete instance
-    * so that it can decide what to do with the data.
-    *
-    * @param key The key from the original JSON
-    * @param value Normally either a list or a dict of some form
-    */
-    public void HandleField( String key, Object value ) {
-        // NOOP
+    public String getId() {
+        return id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getAbout() {
+        return about;
     }
 
 }

@@ -2,4 +2,5 @@
 build/*
 dist/*
 docs/*
+lib/*
 test_results/*
