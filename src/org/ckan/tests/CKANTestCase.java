@@ -1,5 +1,6 @@
 package org.ckan.tests;
 
+
 import org.junit.* ;
 import static org.junit.Assert.* ;
 
@@ -15,16 +16,13 @@ public class CKANTestCase {
 
     @Test
     public void test_BasicDataset_Local() {
-        Gson gson = new Gson();
-        Dataset ds = gson.fromJson(loadString(new File("/Users/ross/test.json")), Dataset.class);
-        System.out.println( ds );
+        Client c = new Client( new Connection() );
+        //Dataset ds = c.LoadClass( Dataset.class, "{title:\"Testing\"}" );
+        //System.out.println(ds);
     }
 
     @Test
     public void test_BasicGroup_Local() {
-        Gson gson = new Gson();
-        Group g = gson.fromJson(loadString(new File("/Users/ross/test2.json")), Group.class);
-        System.out.println( g );
     }
 
 
