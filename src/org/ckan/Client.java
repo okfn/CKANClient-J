@@ -14,6 +14,10 @@ import com.google.gson.Gson;
  */
 public final class Client {
 
+    public class Response {
+        public String success;
+    }
+
     private Connection _connection = null;
 
     public Client( Connection c, String apikey ) {
@@ -30,6 +34,9 @@ public final class Client {
     public Dataset getDatasetByName(String name) {
         String returned_json = this._connection.Post("/api/action/package_show",
                                                      "{\"id\":\"" + name + "\"}" );
+
+        Client.Response r = LoadClass( Client.Response.class, returned_json);
+        System.out.println( r.success );
 
         returned_json = returned_json.substring( returned_json.indexOf("result") + 6 );
         returned_json = returned_json.substring( returned_json.indexOf("{") );
