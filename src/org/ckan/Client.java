@@ -27,7 +27,6 @@ public final class Client {
 
     protected <T> T LoadClass( Class<T> cls, String data ) {
         Gson gson = new Gson();
-        System.out.println(data);
         return gson.fromJson(data, cls);
     }
 
@@ -36,7 +35,9 @@ public final class Client {
                                                      "{\"id\":\"" + name + "\"}" );
 
         Client.Response r = LoadClass( Client.Response.class, returned_json);
-        System.out.println( r.success );
+        if ( r.success == "false" ) {
+
+        }
 
         returned_json = returned_json.substring( returned_json.indexOf("result") + 6 );
         returned_json = returned_json.substring( returned_json.indexOf("{") );
