@@ -13,6 +13,11 @@ import java.util.List;
  */
 public class Dataset {
 
+    public class Response {
+        public boolean success;
+        public String result;
+    }
+
     private String id;
     private String name;
     private String title;
@@ -34,14 +39,14 @@ public class Dataset {
     private String notes;
     private String notes_rendered;
     private boolean isopen;
-    private List<String> tags;
-    private List<String> groups;
-    private List<Resource> resources;    
+    private List<Tag> tags;
+    private List<Group> groups;
+    private List<Resource> resources;
     private String url;
     private String ckan_url;
 
     public Dataset(){}
-    
+
     public void setId(String id) {
         this.id = id;
     }
@@ -178,7 +183,7 @@ public class Dataset {
     }
 
     public void setType(String type) {
-        this.type = type;    
+        this.type = type;
     }
 
     public String getType() {
@@ -209,19 +214,19 @@ public class Dataset {
         return isopen;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 
-    public List<String> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public void setGroups(List<String> groups) {
+    public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 
-    public List<String> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 

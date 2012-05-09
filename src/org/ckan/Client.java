@@ -23,12 +23,17 @@ public final class Client {
 
     protected <T> T LoadClass( Class<T> cls, String data ) {
         Gson gson = new Gson();
+        System.out.println(data);
         return gson.fromJson(data, cls);
     }
 
     public Dataset getDatasetByName(String name) {
         String returned_json = this._connection.Post("/api/action/package_show",
                                                      "{\"id\":\"" + name + "\"}" );
+
+        returned_json = returned_json.substring( returned_json.indexOf("result") + 6 );
+        returned_json = returned_json.substring( returned_json.indexOf("{") );
+        returned_json = returned_json.substring( 0, returned_json.length() -1  );
         return LoadClass( Dataset.class, returned_json);
     }
 

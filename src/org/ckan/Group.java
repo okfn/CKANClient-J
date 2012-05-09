@@ -15,6 +15,7 @@ public class Group {
 
     private String id;
     private String name;
+    private String capacity;
     private String title;
     private String type;
     private String description;
@@ -23,9 +24,9 @@ public class Group {
     private String approval_status;
     private ArrayList<String> packages;
     private HashMap<String,String> extras;
-    
+
     public Group() {}
-    
+
     public void setId(String id) {
         this.id = id;
     }
@@ -40,6 +41,14 @@ public class Group {
 
     public String getName() {
         return name;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getCapacity() {
+        return capacity;
     }
 
     public void setTitle(String title) {
@@ -104,7 +113,7 @@ public class Group {
 
     public ArrayList<String> getPackages() {
         return packages;
-    }    
+    }
 
     public String toString() {
         return "<Group: " + this.getName() + "  ( " + this.getPackages().size() + " packages)>";
