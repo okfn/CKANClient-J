@@ -16,8 +16,9 @@ public final class Client {
 
     private Connection _connection = null;
 
-    public Client( Connection c ) {
+    public Client( Connection c, String apikey ) {
         this._connection = c;
+        this._connection.setApiKey(apikey);
     }
 
     protected <T> T LoadClass( Class<T> cls, String data ) {
@@ -25,7 +26,11 @@ public final class Client {
         return gson.fromJson(data, cls);
     }
 
-    
+    public Dataset getDatasetByName(String name) {
+        String returned_json = this._connection.Post("/api/action/package_show",
+                                                     "{\"id\":\"" + name + "\"}" );
+        return LoadClass( Dataset.class, returned_json);
+    }
 
 }
 

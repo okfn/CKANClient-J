@@ -16,36 +16,15 @@ public class CKANTestCase {
 
     @Test
     public void test_BasicDataset_Local() {
-        Client c = new Client( new Connection() );
-        //Dataset ds = c.LoadClass( Dataset.class, "{title:\"Testing\"}" );
-        //System.out.println(ds);
+        Client c = new Client( new Connection("http://localhost", 5000), "301ebf50-58a1-45f6-bdc6-0cfb03749cef");
+        //"14191e87-fabf-43dd-874c-882299f254d5 " );
+        Dataset ds = c.getDatasetByName( "BjFHjVHqZ73BVquXPwk0lw" );
+        System.out.println( ds );
     }
 
     @Test
     public void test_BasicGroup_Local() {
     }
-
-
- public static String loadString(File file) {
-    try{
-      int len;
-      char[] chr = new char[4096];
-      final StringBuffer buffer = new StringBuffer();
-      final FileReader reader = new FileReader(file);
-      try {
-          while ((len = reader.read(chr)) > 0) {
-              buffer.append(chr, 0, len);
-          }
-      } finally {
-          reader.close();
-      }
-      return buffer.toString();
-  } catch ( IOException ioe) {
-    System.out.println(ioe);
-  }
-  System.out.println("eerk");
-  return "";
-  }
 
 }
 
