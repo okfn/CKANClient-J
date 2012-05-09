@@ -16,6 +16,20 @@
     <mkdir dir="${test_results}"/>
   </target>
 
+  <target name="deps">
+    <mkdir dir="${lib}"/>
+    <get src="http://google-gson.googlecode.com/files/google-gson-2.2-release.zip"
+        dest="${lib}/google-gson-2.2-release.zip"
+        verbose="true"
+        usetimestamp="true"/>
+    <unzip src="${lib}/google-gson-2.2-release.zip" dest="${lib}"/>
+    <copy file="${lib}/google-gson-2.2/gson-2.2.jar" todir="${lib}"/>
+    <get src="http://cloud.github.com/downloads/KentBeck/junit/junit-4.10.jar"
+        dest="${lib}/junit-4.10.jar"
+        verbose="true"
+        usetimestamp="true"/>
+  </target>
+
   <target name="compile" depends="init"
         description="compile the source ">
     <javac srcdir="${src}" destdir="${build}"
