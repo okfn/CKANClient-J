@@ -15,7 +15,7 @@ public class Dataset {
 
     public class Response {
         public boolean success;
-        public String result;
+        public Dataset result;
     }
 
     private String id;

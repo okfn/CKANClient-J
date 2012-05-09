@@ -34,15 +34,11 @@ public final class Client {
         String returned_json = this._connection.Post("/api/action/package_show",
                                                      "{\"id\":\"" + name + "\"}" );
 
-        Client.Response r = LoadClass( Client.Response.class, returned_json);
-        if ( r.success == "false" ) {
+        Dataset.Response r = LoadClass( Dataset.Response.class, returned_json);
+        if ( ! r.success ) {
 
         }
-
-        returned_json = returned_json.substring( returned_json.indexOf("result") + 6 );
-        returned_json = returned_json.substring( returned_json.indexOf("{") );
-        returned_json = returned_json.substring( 0, returned_json.length() -1  );
-        return LoadClass( Dataset.class, returned_json);
+        return r.result;
     }
 
 }
