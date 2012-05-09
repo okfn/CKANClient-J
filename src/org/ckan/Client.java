@@ -30,10 +30,10 @@ public final class Client {
         return gson.fromJson(data, cls);
     }
 
-    public Dataset getDatasetByName(String name) {
+    public Dataset getDatasetByName(String name)
+            throws CKANException {
         String returned_json = this._connection.Post("/api/action/package_show",
                                                      "{\"id\":\"" + name + "\"}" );
-
         Dataset.Response r = LoadClass( Dataset.Response.class, returned_json);
         if ( ! r.success ) {
 
@@ -41,7 +41,8 @@ public final class Client {
         return r.result;
     }
 
-    public Group getGroupByName(String name) {
+    public Group getGroupByName(String name)
+            throws CKANException {
         String returned_json = this._connection.Post("/api/action/group_show",
                                                      "{\"id\":\"" + name + "\"}" );
         Group.Response r = LoadClass( Group.Response.class, returned_json);

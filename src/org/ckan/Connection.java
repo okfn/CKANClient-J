@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
+
 /**
  * Connection holds the connection details for this session
  *
@@ -45,7 +46,8 @@ public final class Connection {
         this._apikey = key;
     }
 
-    protected String Post(String path, String data) {
+    protected String Post(String path, String data)
+        throws CKANException {
         URL url = null;
 
         try {
@@ -73,9 +75,9 @@ public final class Connection {
             wr.close();
             rd.close();
         } catch ( java.io.IOException ioe ) {
-            System.out.println(ioe);
+            throw new CKANException( ioe.toString() );
         } catch (Exception e) {
-            System.out.println(e);
+            throw new CKANException( e.toString() );
         }
 
         return body;
