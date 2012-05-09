@@ -13,6 +13,12 @@ import java.util.ArrayList;
  */
 public class Group {
 
+    public class Response {
+        public boolean success;
+        public Group result;
+    }
+
+
     private String id;
     private String name;
     private String capacity;
@@ -116,7 +122,7 @@ public class Group {
     }
 
     public String toString() {
-        return "<Group: " + this.getName() + "  ( " + this.getPackages().size() + " packages)>";
+        return "<Group: " + this.getName() + ", " + this.getTitle() + "  (" + this.getType()+ ")>";
     }
 
 }

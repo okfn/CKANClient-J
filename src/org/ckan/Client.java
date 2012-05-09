@@ -41,6 +41,16 @@ public final class Client {
         return r.result;
     }
 
+    public Group getGroupByName(String name) {
+        String returned_json = this._connection.Post("/api/action/group_show",
+                                                     "{\"id\":\"" + name + "\"}" );
+        Group.Response r = LoadClass( Group.Response.class, returned_json);
+        if ( ! r.success ) {
+
+        }
+        return r.result;
+    }
+
 }
 
 
