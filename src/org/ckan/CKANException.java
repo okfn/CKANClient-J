@@ -19,6 +19,10 @@ public class CKANException extends Exception {
         messages.add( message );
     }
 
+    public void addError( String error ) {
+        messages.add( error );
+    }
+
     public String toString() {
         return messages.toString();
     }

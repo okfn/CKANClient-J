@@ -9,7 +9,7 @@ An [ant](http://ant.apache.org/) build.xml file is provided with the source code
 
 __Install Dependencies__
 
-Run the following to install dependencies (gson 2.2 and junit 4.10) locally
+Run the following to install dependencies (gson 2.2 and junit 4.10 and apache.httpclient 4.1.3) locally
 
 ```
 ant deps

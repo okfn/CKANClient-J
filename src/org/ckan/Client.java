@@ -3,6 +3,8 @@ package org.ckan;
 
 import com.google.gson.Gson;
 
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * The primary interface to this package the Client class is responsible
@@ -30,6 +32,21 @@ public final class Client {
         return gson.fromJson(data, cls);
     }
 
+    private void HandleError( String json, String action )
+          throws CKANException {
+        CKANException exception = new CKANException("Errors occured performing: " + action);
+
+        HashMap hm  = LoadClass( HashMap.class, json);
+        Map<String,Object> m = (Map<String,Object>)hm.get("error");
+        for (Map.Entry<String,Object> entry : m.entrySet()) {
+            if ( entry.getKey().startsWith("_") )
+                continue;
+            exception.addError( entry.getValue() + " - " + entry.getKey() );
+        }
+        throw exception;
+    }
+
+
     /**
     * Retrieves a dataset
     *
@@ -46,10 +63,36 @@ public final class Client {
                                                      "{\"id\":\"" + name + "\"}" );
         Dataset.Response r = LoadClass( Dataset.Response.class, returned_json);
         if ( ! r.success ) {
-
+            HandleError( returned_json, "getDatasetByName");
         }
         return r.result;
     }
+
+    /**
+    * Creates a dataset on the server
+    *
+    * Takes the provided dataset and sends it to the server to
+    * perform an create, and then returns the newly created dataset.
+    *
+    * @param  dataset A dataset instance
+    * @returns The Dataset as it now exists
+    * @throws A CKANException if the request fails
+    */
+    public Dataset createDataset(Dataset dataset)
+            throws CKANException {
+        Gson gson = new Gson();
+        String data = gson.toJson( dataset );
+
+        String returned_json = this._connection.Post("/api/action/package_create",
+                                                     data );
+        Dataset.Response r = LoadClass( Dataset.Response.class, returned_json);
+        if ( ! r.success ) {
+            // This will always throw an exception
+            HandleError(returned_json, "createDataset");
+        }
+        return r.result;
+    }
+
 
     /**
     * Retrieves a group

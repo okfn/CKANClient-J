@@ -1,13 +1,17 @@
 package org.ckan;
 
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.net.MalformedURLException;
-import java.io.OutputStreamWriter;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
 
+import java.net.MalformedURLException;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.entity.StringEntity;
 
 /**
  * Connection holds the connection details for this session
@@ -58,27 +62,38 @@ public final class Connection {
         }
 
         String body = "";
-        try {
-            String vars = URLEncoder.encode(data, "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8");
-            URLConnection conn = url.openConnection();
-            conn.setRequestProperty("X-CKAN-API-Key", this._apikey);
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write(vars);
-            wr.flush();
 
-            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String line;
-            while ((line = rd.readLine()) != null) {
+        HttpClient httpclient = new DefaultHttpClient();
+        try {
+            HttpPost postRequest = new HttpPost(url.toString());
+            postRequest.setHeader( "X-CKAN-API-Key", this._apikey );
+
+		    StringEntity input = new StringEntity(data);
+		    input.setContentType("application/json");
+		    postRequest.setEntity(input);
+
+            System.out.println("executing request " + postRequest.getURI());
+
+            HttpResponse response = httpclient.execute(postRequest);
+            int statusCode = response.getStatusLine().getStatusCode();
+
+            BufferedReader br = new BufferedReader(
+                        new InputStreamReader((response.getEntity().getContent())));
+
+            String line = "";
+		    while ((line = br.readLine()) != null) {
                 body += line;
-            }
-            wr.close();
-            rd.close();
-        } catch ( java.io.IOException ioe ) {
-            throw new CKANException( ioe.toString() );
-        } catch (Exception e) {
-            throw new CKANException( e.toString() );
+		    }
+
+        } catch( IOException ioe ) {
+            System.out.println( ioe );
+        } finally {
+            // When HttpClient instance is no longer needed,
+            // shut down the connection manager to ensure
+            // immediate deallocation of all system resources
+            httpclient.getConnectionManager().shutdown();
         }
+
 
         return body;
     }
