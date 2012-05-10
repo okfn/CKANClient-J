@@ -72,8 +72,6 @@ public final class Connection {
 		    input.setContentType("application/json");
 		    postRequest.setEntity(input);
 
-            System.out.println("executing request " + postRequest.getURI());
-
             HttpResponse response = httpclient.execute(postRequest);
             int statusCode = response.getStatusLine().getStatusCode();
 

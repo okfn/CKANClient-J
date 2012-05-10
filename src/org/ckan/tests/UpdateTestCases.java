@@ -8,9 +8,7 @@ import org.ckan.*;
 
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+
 
 public class UpdateTestCases {
 
