@@ -23,6 +23,10 @@ public class CKANException extends Exception {
         messages.add( error );
     }
 
+    public ArrayList<String> getErrorMessages() {
+        return messages;
+    }
+
     public String toString() {
         return messages.toString();
     }

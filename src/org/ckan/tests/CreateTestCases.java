@@ -26,9 +26,26 @@ public class CreateTestCases {
             ds.setNotes("A description");
 
             Dataset result = c.createDataset(ds);
-            System.out.println( result );
         } catch ( CKANException e ) {
             System.out.println(e);
+        }
+    }
+
+    @Test
+    public void test_CreateDatasetFail() {
+        Client c = new Client( new Connection("http://localhost", 5000),
+                              "1de4a922-732d-40ad-8169-abd3d5d0e196");
+        try {
+            Dataset ds = new Dataset();
+            ds.setName( UUID.randomUUID().toString() );
+            ds.setTitle("Test Dataset");
+            ds.setNotes("A description");
+            c.createDataset(ds);
+
+            c.createDataset(ds);
+            assertTrue( false ); // Should have an exception for dupe name
+        } catch ( CKANException e ) {
+            assertEquals(e.getErrorMessages().size(), 2);
         }
     }
 
