@@ -33,5 +33,6 @@ TODO
 ----
 
  * Support for extras in Dataset/Groups
- * Write support
+ * Non-dataset objects
+ * Search...
 

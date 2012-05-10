@@ -16,24 +16,43 @@ import java.util.HashMap;
  */
 public final class Client {
 
-    public class Response {
-        public String success;
-    }
-
     private Connection _connection = null;
 
+    /**
+    * Constructs a new Client for making requests to a remote CKAN instance.
+    *
+    * @param  c A Connection object containing info on the location of the
+    *         CKAN Instance.
+    * @param  apikey A user's API Key sent with every request.
+    */
     public Client( Connection c, String apikey ) {
         this._connection = c;
         this._connection.setApiKey(apikey);
     }
 
+    /**
+    * Loads a JSON string into a class of the specified type.
+    */
     protected <T> T LoadClass( Class<T> cls, String data ) {
         Gson gson = new Gson();
         return gson.fromJson(data, cls);
     }
 
+    /**
+    * Handles error responses from CKAN
+    *
+    * When given a JSON string it will generate a valid CKANException
+    * containing all of the error messages from the JSON.
+    *
+    * @param  json The JSON response
+    * @param  action The name of the action calling this for the primary
+    *         error message.
+    * @throws A CKANException containing the error messages contained in the
+    *         provided JSON.
+    */
     private void HandleError( String json, String action )
           throws CKANException {
+
         CKANException exception = new CKANException("Errors occured performing: " + action);
 
         HashMap hm  = LoadClass( HashMap.class, json);
@@ -57,15 +76,33 @@ public final class Client {
     * @returns The Dataset for the provided name.
     * @throws A CKANException if the request fails
     */
-    public Dataset getDatasetByName(String name)
+    public Dataset getDataset(String name)
             throws CKANException {
         String returned_json = this._connection.Post("/api/action/package_show",
                                                      "{\"id\":\"" + name + "\"}" );
         Dataset.Response r = LoadClass( Dataset.Response.class, returned_json);
         if ( ! r.success ) {
-            HandleError( returned_json, "getDatasetByName");
+            HandleError( returned_json, "getDataset");
         }
         return r.result;
+    }
+
+    /**
+    * Deletes a dataset
+    *
+    * Deletes the dataset specified with the provided name/id
+    *
+    * @param  name The name or ID of the dataset to delete
+    * @throws A CKANException if the request fails
+    */
+    public void deleteDataset(String name)
+            throws CKANException {
+        String returned_json = this._connection.Post("/api/action/package_delete",
+                                                     "{\"id\":\"" + name + "\"}" );
+        Dataset.Response r = LoadClass( Dataset.Response.class, returned_json);
+        if ( ! r.success ) {
+            HandleError( returned_json, "deleteDataset");
+        }
     }
 
     /**

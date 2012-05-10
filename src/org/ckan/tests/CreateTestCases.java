@@ -8,7 +8,6 @@ import org.ckan.*;
 
 import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.UUID;
 
 public class CreateTestCases {

@@ -50,6 +50,18 @@ public final class Connection {
         this._apikey = key;
     }
 
+
+    /**
+    * Makes a POST request
+    *
+    * Submits a POST HTTP request to the CKAN instance configured within
+    * the constructor, returning tne entire contents of the response.
+    *
+    * @param  path The URL path to make the POST request to
+    * @param  data The data to be posted to the URL
+    * @returns The String contents of the response
+    * @throws A CKANException if the request fails
+    */
     protected String Post(String path, String data)
         throws CKANException {
         URL url = null;
@@ -82,16 +94,11 @@ public final class Connection {
 		    while ((line = br.readLine()) != null) {
                 body += line;
 		    }
-
         } catch( IOException ioe ) {
             System.out.println( ioe );
         } finally {
-            // When HttpClient instance is no longer needed,
-            // shut down the connection manager to ensure
-            // immediate deallocation of all system resources
             httpclient.getConnectionManager().shutdown();
         }
-
 
         return body;
     }

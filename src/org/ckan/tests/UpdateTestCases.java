@@ -16,7 +16,7 @@ public class UpdateTestCases {
     public void test_UpdateDataset() {
 /*        Client c = new Client( new Connection("http://localhost", 5000), "301ebf50-58a1-45f6-bdc6-0cfb03749cef");
         try {
-            Dataset ds = c.getDatasetByName( "BjFHjVHqZ73BVquXPwk0lw" );
+            Dataset ds = c.getDataset( "BjFHjVHqZ73BVquXPwk0lw" );
             System.out.println( ds );
         } catch ( CKANException e ) {
             System.out.println(e);

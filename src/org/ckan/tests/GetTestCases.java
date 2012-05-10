@@ -21,7 +21,7 @@ public class GetTestCases {
             ds.setNotes("A description");
             c.createDataset(ds);
 
-            Dataset get = c.getDatasetByName( ds.getName() );
+            Dataset get = c.getDataset( ds.getName() );
             assertEquals( get.getTitle(), ds.getTitle() );
             assertEquals( get.getName(), ds.getName() );
             assertEquals( get.getNotes(), ds.getNotes() );
@@ -35,7 +35,7 @@ public class GetTestCases {
         Client c = new Client( new Connection("http://localhost", 5000),
                                "1de4a922-732d-40ad-8169-abd3d5d0e196");
         try {
-            Dataset get = c.getDatasetByName( UUID.randomUUID().toString() );
+            Dataset get = c.getDataset( UUID.randomUUID().toString() );
         } catch ( CKANException e ) {
             assertEquals( e.getErrorMessages().size(), 2 );
         }
