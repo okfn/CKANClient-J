@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.UUID;
 
 public class CreateTestCases {
 
@@ -20,10 +21,12 @@ public class CreateTestCases {
                               "1de4a922-732d-40ad-8169-abd3d5d0e196");
         try {
             Dataset ds = new Dataset();
-            ds.setId("123456");
+            ds.setName( UUID.randomUUID().toString() );
+            ds.setTitle("Test Dataset");
             ds.setNotes("A description");
 
-            c.createDataset(ds);
+            Dataset result = c.createDataset(ds);
+            System.out.println( result );
         } catch ( CKANException e ) {
             System.out.println(e);
         }
