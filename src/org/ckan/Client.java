@@ -30,6 +30,16 @@ public final class Client {
         return gson.fromJson(data, cls);
     }
 
+    /**
+    * Retrieves a dataset
+    *
+    * Retrieves the dataset with the given name, or ID, from the CKAN
+    * connection specified in the Client constructor.
+    *
+    * @param  name The name or ID of the dataset to fetch
+    * @returns The Dataset for the provided name.
+    * @throws A CKANException if the request fails
+    */
     public Dataset getDatasetByName(String name)
             throws CKANException {
         String returned_json = this._connection.Post("/api/action/package_show",
@@ -41,6 +51,16 @@ public final class Client {
         return r.result;
     }
 
+    /**
+    * Retrieves a group
+    *
+    * Retrieves the group with the given name, or ID, from the CKAN
+    * connection specified in the Client constructor.
+    *
+    * @param  name The name or ID of the group to fetch
+    * @returns The Group instance for the provided name.
+    * @throws A CKANException if the request fails
+    */
     public Group getGroupByName(String name)
             throws CKANException {
         String returned_json = this._connection.Post("/api/action/group_show",

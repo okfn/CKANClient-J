@@ -17,7 +17,7 @@ ant deps
 
 __Generate documentation__
 
-Documentation is generated in the doc folder.
+Documentation is generated in the docs folder.
 
 ```
 ant docs
