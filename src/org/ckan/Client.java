@@ -151,6 +151,47 @@ public final class Client {
         return r.result;
     }
 
+  /**
+    * Deletes a Group
+    *
+    * Deletes the group specified with the provided name/id
+    *
+    * @param  name The name or ID of the group to delete
+    * @throws A CKANException if the request fails
+    */
+    public void deleteGroup(String name)
+            throws CKANException {
+        String returned_json = this._connection.Post("/api/action/group_delete",
+                                                     "{\"id\":\"" + name + "\"}" );
+        Group.Response r = LoadClass( Group.Response.class, returned_json);
+        if ( ! r.success ) {
+            HandleError( returned_json, "deleteGroup");
+        }
+    }
+
+    /**
+    * Creates a Group on the server
+    *
+    * Takes the provided Group and sends it to the server to
+    * perform an create, and then returns the newly created Group.
+    *
+    * @param  group A Group instance
+    * @returns The Group as it now exists on the server
+    * @throws A CKANException if the request fails
+    */
+    public Group createGroup(Group group)
+            throws CKANException {
+        Gson gson = new Gson();
+        String data = gson.toJson( group );
+        String returned_json = this._connection.Post("/api/action/package_create",
+                                                     data );
+        Group.Response r = LoadClass( Group.Response.class, returned_json);
+        if ( ! r.success ) {
+            // This will always throw an exception
+            HandleError(returned_json, "createGroup");
+        }
+        return r.result;
+    }
 }
 
 
