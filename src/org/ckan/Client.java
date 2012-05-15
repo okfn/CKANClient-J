@@ -119,7 +119,6 @@ public final class Client {
             throws CKANException {
         Gson gson = new Gson();
         String data = gson.toJson( dataset );
-
         String returned_json = this._connection.Post("/api/action/package_create",
                                                      data );
         Dataset.Response r = LoadClass( Dataset.Response.class, returned_json);
@@ -141,13 +140,13 @@ public final class Client {
     * @returns The Group instance for the provided name.
     * @throws A CKANException if the request fails
     */
-    public Group getGroupByName(String name)
+    public Group getGroup(String name)
             throws CKANException {
         String returned_json = this._connection.Post("/api/action/group_show",
                                                      "{\"id\":\"" + name + "\"}" );
         Group.Response r = LoadClass( Group.Response.class, returned_json);
         if ( ! r.success ) {
-
+            HandleError(returned_json, "getGroup");
         }
         return r.result;
     }

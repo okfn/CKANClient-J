@@ -3,6 +3,8 @@ package org.ckan;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Represents a CKAN Dataset (previously a Package)
@@ -44,6 +46,7 @@ public class Dataset {
     private List<Resource> resources;
     private String url;
     private String ckan_url;
+    private List<Extra> extras;
 
     public Dataset(){}
 
@@ -244,6 +247,14 @@ public class Dataset {
 
     public String getCkan_url() {
         return ckan_url;
+    }
+
+    public List<Extra> getExtras() {
+        return extras;
+    }
+
+    public void setExtras( List<Extra> extras ) {
+        this.extras = extras;
     }
 
     public String toString() {

@@ -3,7 +3,7 @@ JCKANClient
 
 __A work in progress__
 
-Currently this lib provides a read-only interface to a [CKAN 1.7](http://ckan.org) installation.
+Provides an interface to a [CKAN 1.7](http://ckan.org) installation.
 
 An [ant](http://ant.apache.org/) build.xml file is provided with the source code, and the following tasks are implemented:
 

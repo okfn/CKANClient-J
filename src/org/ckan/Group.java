@@ -1,8 +1,7 @@
 package org.ckan;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a CKAN group
@@ -28,8 +27,8 @@ public class Group {
     private String image_url;
     private String created;
     private String approval_status;
-    private ArrayList<String> packages;
-    private HashMap<String,String> extras;
+    private List<Package> packages;
+    private List<Extra> extras;
 
     public Group() {}
 
@@ -105,19 +104,19 @@ public class Group {
         return approval_status;
     }
 
-    public void setExtras(HashMap<String,String> extras) {
+    public void setExtras(List<Extra> extras) {
         this.extras = extras;
     }
 
-    public HashMap<String,String> getExtras() {
+    public List<Extra> getExtras() {
         return extras;
     }
 
-    public void setPackages(ArrayList<String> packages) {
+    public void setPackages(List<Package> packages) {
         this.packages = packages;
     }
 
-    public ArrayList<String> getPackages() {
+    public List<Package> getPackages() {
         return packages;
     }
 

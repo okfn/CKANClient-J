@@ -89,7 +89,7 @@
       <batchtest fork="yes" todir="test_results/">
         <formatter type="xml"/>
         <fileset dir="${src}">
-          <include name="**/*TestCases.java"/>
+          <include name="**/GetTestCases.java"/>
         </fileset>
       </batchtest>
     </junit>

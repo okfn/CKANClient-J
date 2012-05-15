@@ -41,6 +41,35 @@ public class GetTestCases {
         }
     }
 
+
+
+    @Test
+    public void test_GetDatasetTDH() {
+        Client c = new Client( new Connection("http://datahub.io"),
+                               "");
+        try {
+            Dataset get = c.getDataset( "gold-prices" );
+            System.out.println(get);
+
+            System.out.println(get.getExtras());
+        } catch ( CKANException e ) {
+        }
+    }
+
+
+    @Test
+    public void test_GetGroupTDH() {
+        Client c = new Client( new Connection("http://datahub.io"),
+                               "");
+        try {
+            Group get = c.getGroup( "belarus_open_data" );
+            System.out.println(get);
+        } catch ( CKANException e ) {
+            System.out.println(e);
+        }
+    }
+
+
 }
 
 

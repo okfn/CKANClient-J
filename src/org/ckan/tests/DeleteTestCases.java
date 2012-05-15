@@ -8,14 +8,12 @@ import org.ckan.*;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
-public class CreateTestCases {
+public class DeleteTestCases {
 
     @Test
-    public void test_CreateDataset() {
+    public void test_DeleteDataset() {
         Client c = new Client( new Connection("http://localhost", 5000),
                               "1de4a922-732d-40ad-8169-abd3d5d0e196");
         try {
@@ -23,37 +21,32 @@ public class CreateTestCases {
             ds.setName( UUID.randomUUID().toString() );
             ds.setTitle("Test Dataset");
             ds.setNotes("A description");
-
-            ArrayList<Extra> extras = new ArrayList<Extra>();
-            extras.add( new Extra("Extra Field", "Extra Value") );
-            ds.setExtras( extras );
-
             Dataset result = c.createDataset(ds);
-            //assertEquals( result.getExtras().size(), 1 );
-            //System.out.println( result.getExtras() );
+
+            c.deleteDataset(result.getId());
         } catch ( CKANException e ) {
             System.out.println(e);
         }
     }
-/*
+
     @Test
-    public void test_CreateDatasetFail() {
+    public void test_DeleteDatasetNoAuth() {
         Client c = new Client( new Connection("http://localhost", 5000),
-                              "1de4a922-732d-40ad-8169-abd3d5d0e196");
+                              "invalid");
         try {
             Dataset ds = new Dataset();
             ds.setName( UUID.randomUUID().toString() );
             ds.setTitle("Test Dataset");
             ds.setNotes("A description");
-            c.createDataset(ds);
+            Dataset result = c.createDataset(ds);
 
-            c.createDataset(ds);
-            assertTrue( false ); // Should have an exception for dupe name
+            c.deleteDataset(result.getId());
+            assertTrue( false );
         } catch ( CKANException e ) {
-            assertEquals(e.getErrorMessages().size(), 2);
+            assertEquals(2, e.getErrorMessages().size());
         }
     }
-*/
+
 
 }
 
