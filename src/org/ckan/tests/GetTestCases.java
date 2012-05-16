@@ -19,7 +19,7 @@ public class GetTestCases {
             throw new RuntimeException("Unable to find APIKEY env variable");
         }
     }
-/*
+
     @Test
     public void test_GetDataset() {
         Client c = new Client( new Connection("http://localhost", 5000),
@@ -92,7 +92,7 @@ public class GetTestCases {
             System.out.println(e);
         }
     }
-*/
+
     /**
     * Performs a search against the datahub, finding all of the datasets that
     * have anything to do with gold.  Once found it will retrieve all of the
@@ -105,9 +105,6 @@ public class GetTestCases {
         Client client = new Client( new Connection("http://datahub.io"), "");
 
         try {
-            // Setup our collection of Resources
-            List<Resource> resources = new ArrayList<Resource>();
-
             // Get the search results for the word gold
             Dataset.SearchResults results = client.findDatasets("gold");
             for (Dataset ds : results.results ) {
