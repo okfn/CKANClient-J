@@ -11,10 +11,18 @@ import com.google.gson.Gson;
 
 
 public class UpdateTestCases {
+    private static String ApiKey;
+    static {
+        ApiKey = System.getenv("APIKEY");
+        if ( ApiKey == null ) {
+            throw new RuntimeException("Unable to find APIKEY env variable");
+        }
+    }
 
     @Test
     public void test_UpdateDataset() {
-/*        Client c = new Client( new Connection("http://localhost", 5000), "301ebf50-58a1-45f6-bdc6-0cfb03749cef");
+/*        Client c = new Client( new Connection("http://localhost", 5000),
+                                 UpdateTestCases.ApiKey);
         try {
             Dataset ds = c.getDataset( "BjFHjVHqZ73BVquXPwk0lw" );
             System.out.println( ds );

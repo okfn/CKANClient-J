@@ -3,6 +3,7 @@ package org.ckan;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -18,6 +19,25 @@ public class Dataset {
     public class Response {
         public boolean success;
         public Dataset result;
+    }
+
+    public class SearchResponse {
+        public boolean success;
+        public SearchResults result;
+    }
+
+    /**
+     * Represents the results of a search on a CKAN instance, and shows the
+     * count and provides a list of dataset objects which match the term.
+     *
+     * @author      Ross Jones <ross.jones@okfn.org>
+     * @version     1.7
+     * @since       2012-05-01
+     */
+    public class SearchResults {
+        //{"count": 4, "search_facets": {}, "facets": {}, "results":
+        public int count;
+        public List<Dataset> results;
     }
 
     private String id;
@@ -255,6 +275,14 @@ public class Dataset {
 
     public void setExtras( List<Extra> extras ) {
         this.extras = extras;
+    }
+
+    public List<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources( List<Resource> resources ) {
+        this.resources = resources;
     }
 
     public String toString() {

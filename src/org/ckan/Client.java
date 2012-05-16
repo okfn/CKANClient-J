@@ -3,6 +3,7 @@ package org.ckan;
 
 import com.google.gson.Gson;
 
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -119,8 +120,10 @@ public final class Client {
             throws CKANException {
         Gson gson = new Gson();
         String data = gson.toJson( dataset );
+        System.out.println( data );
         String returned_json = this._connection.Post("/api/action/package_create",
                                                      data );
+        System.out.println( returned_json );
         Dataset.Response r = LoadClass( Dataset.Response.class, returned_json);
         if ( ! r.success ) {
             // This will always throw an exception
@@ -192,6 +195,30 @@ public final class Client {
         }
         return r.result;
     }
+
+
+    /**
+    * Uses the provided search term to find datasets on the server
+    *
+    * Takes the provided query and locates those datasets that match the query
+    *
+    * @param  query The search terms
+    * @returns A SearchResults object that contains a count and the objects
+    * @throws A CKANException if the request fails
+    */
+    public Dataset.SearchResults findDatasets(String query)
+            throws CKANException {
+
+        String returned_json = this._connection.Post("/api/action/package_search",
+                                                     "{\"q\":\"" + query +"\"}" );
+        Dataset.SearchResponse sr = LoadClass( Dataset.SearchResponse.class, returned_json);
+        if ( ! sr.success ) {
+            // This will always throw an exception
+            HandleError(returned_json, "findDatasets");
+        }
+        return sr.result;
+    }
+
 }
 
 

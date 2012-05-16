@@ -14,11 +14,11 @@ public class Tag {
     private String name;
     private String id;
 
-    public String getVocabulary_id() { return vocabulary_id; }
-    public void setVolcabulary_id(String v) { vocabulary_id = v; }
+    public String getVocabularyId() { return vocabulary_id; }
+    public void setVolcabularyId(String v) { vocabulary_id = v; }
 
-    public String getDisplay_name() { return display_name; }
-    public void setDisplay_name(String d) { display_name = d; }
+    public String getDisplayName() { return display_name; }
+    public void setDisplayName(String d) { display_name = d; }
 
     public String getName() { return name; }
     public void setName(String n) { name = n; }
@@ -27,4 +27,8 @@ public class Tag {
     public void setId(String v) { id = v; }
 
     public Tag() {}
+
+    public String toString() {
+        return "<Tag:" + getName() + "/" + getDisplayName()  + ">";
+    }
 }

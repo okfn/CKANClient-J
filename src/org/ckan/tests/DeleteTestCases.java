@@ -12,10 +12,18 @@ import java.util.UUID;
 
 public class DeleteTestCases {
 
+    private static String ApiKey;
+    static {
+        ApiKey = System.getenv("APIKEY");
+        if ( ApiKey == null ) {
+            throw new RuntimeException("Unable to find APIKEY env variable");
+        }
+    }
+
     @Test
     public void test_DeleteDataset() {
         Client c = new Client( new Connection("http://localhost", 5000),
-                              "1de4a922-732d-40ad-8169-abd3d5d0e196");
+                              DeleteTestCases.ApiKey);
         try {
             Dataset ds = new Dataset();
             ds.setName( UUID.randomUUID().toString() );
