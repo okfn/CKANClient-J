@@ -1,3 +1,11 @@
+This library is for old version of CKAN.
+====
+
+It is suggested that you instead use [Jackan](https://github.com/opendatatrentino/jackan) or read more on the [Project Page](http://opendatatrentino.github.io/jackan/0.4/index.html)
+
+----
+
+
 JCKANClient
 ====
 
